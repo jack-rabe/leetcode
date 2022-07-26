@@ -1,11 +1,18 @@
-# works but causes memory error on Leetcode for large x
-# this happens bc of the range function
 class Solution(object):
     def mySqrt(self, x):
-        lower = 0
-        for i in range(x + 1):
-            if i * i > x:
-                break
+        if x == 0:
+            return 0
+
+        low = 1
+        high = x
+        while high - 1 > low:
+            mid = (high + low + 1) // 2
+            ans = mid * mid
+            if ans > x:
+                high = mid
+            elif ans < x:
+                low = mid
             else:
-                lower = i
-        return lower
+                return mid
+
+        return low
